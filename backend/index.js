@@ -5,10 +5,10 @@ const db= require("./dal/db")
 db.connect
 const cors = require('cors')
 app.use(cors())
+app.use(express.json());
 
 const emailRouter=require("./routs/email.router")
 app.use("/email", emailRouter);
-app.use(express.json());
 
 
 app.listen(8200, () => {

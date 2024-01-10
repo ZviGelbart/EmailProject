@@ -22,7 +22,10 @@ const emailSchema = new mongoose.Schema ({
         type:Date,
         default:Date.now
     },
-   
+   status: {
+    type: Boolean,
+    default: false
+   }
 })
 
 const emailModel = mongoose.model('email', emailSchema)
