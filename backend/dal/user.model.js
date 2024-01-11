@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  img: {
+    data: Buffer,
+    type: String
+  },
 });
 
 const userModel = mongoose.model("user", userSchema);

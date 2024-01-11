@@ -5,6 +5,9 @@ DB.connect;
 async function create(data) {
   return userModel.create(data);
 }
+async function readOne(filter){
+  return userModel.findOne({...filter, isActive: true})
+}
 
 async function read(filter) {
   return userModel.find({ ...filter, isActive: true });
@@ -19,4 +22,4 @@ async function del(filter, data) {
 }
 
 
-module.exports = {  create,read, update,del};
+module.exports = {  create,read, update,del, readOne};

@@ -7,7 +7,24 @@ userRouter.get("/", async function (req, res) {
     res.send(data);
   });
 
-  
+userRouter.get("/search/", async (req, res) => {
+  try {
+    let data = await userServices.getUser(req.query)
+    res.send(data)
+  }catch(err) {
+    console.log("error: \n", err);
+    res.status(400).send(err)
+  }
+})
+
+userRouter.post("/", async (req, res) => {
+    try {
+        const newUser = await userServices.createUser(req.body)
+        res.send(newUser)
+    }catch(err){
+        res.status(400).send(err)
+    }
+})
 
 userRouter.delete("/:id", function (req, res) {
     userServices.deleteUser()

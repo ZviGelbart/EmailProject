@@ -1,7 +1,7 @@
 const controller = require("../dal/email.controller");
 
-async function getAllEmails(){
-    const email = await controller.read();
+async function getAllEmails(filter){
+    const email = await controller.read(filter);
     return email;
 }
 
