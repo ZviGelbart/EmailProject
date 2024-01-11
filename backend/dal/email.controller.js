@@ -5,7 +5,8 @@ async function read(filter){
 }
 
 async function create(data){
-    return emailModel.create(data)
+    console.log(data);
+    return emailModel.create(data) 
 }
 
 
@@ -14,7 +15,7 @@ async function create(data){
 // *****create*****
 // const go =async () => {
 //     let email = {
-//         sender: 'example@gmail.com',
+//         sender: 'exmple@gmail.com',
 //         destination: ['recipient1@gmail.com', 'recipient2@gmail.com'],
 //         topic: 'Subject of the email',
 //         body: 'Content of the email'

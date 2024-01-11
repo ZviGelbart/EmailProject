@@ -8,13 +8,13 @@ async function getAllEmails(){
 async function sendEmail(data){
     let errorList = await validation(data);
   if (errorList.length) throw errorList;
-    let mesg = {
+  let mesg = {
         sender: data.sender,
         destination: data.destination,
         topic: data.topic,
         body: data.body,
         Date: new Date()
-    }
+  }
     let newMes = await controller.create(mesg);
     return newMes;
 }
