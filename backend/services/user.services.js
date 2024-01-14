@@ -14,11 +14,11 @@ async function getUser(param){
 }
 
 async function createUser(data) {
-    // exist by email 
+    // exist by email
     const userExist = await controller.readOne({email: data.email});
     if(userExist) throw "The user already exists "
-    
-    //validation 
+
+    //validation
     let errorList = await validation(data)
     if(errorList.length) throw errorList
 

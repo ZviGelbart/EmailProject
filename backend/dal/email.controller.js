@@ -6,7 +6,7 @@ async function read(filter){
 
 async function create(data){
     console.log(data);
-    return emailModel.create(data) 
+    return emailModel.create(data)
 }
 
 
@@ -27,8 +27,6 @@ async function create(data){
 // go()
 
 
-  
-    
 
 
 module.exports = { read , create};
