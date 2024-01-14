@@ -3,7 +3,6 @@ import { FaEnvelope } from "react-icons/fa";
 import { FaPen } from "react-icons/fa6";
 import { MdOutbox } from "react-icons/md";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { Route, Routes } from "react-router-dom";
 export default function Menu() {
   return (
     <div className='flex flex-col m-10 w-1/5'>
