@@ -1,16 +1,12 @@
 import React from 'react'
-import Header from './header/Header'
-import Menu from './menu/menu'
-import Body from './body/Body'
+import Layout from './layout'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 export default function App() {
   return (
-    <div className='bg-slate-200 h-screen w-screen '>
-      <Header/>
-      <div className='flex justify-between'>
-          <Menu/>
-          <Body/>
-      </div>
-    </div>
+    <Routes>
+       <Route path='*' element={<Layout/>} />
+    </Routes>
   )
 }
+
 

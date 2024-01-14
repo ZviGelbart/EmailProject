@@ -3,9 +3,23 @@ import { FaEnvelope } from "react-icons/fa";
 import { FaPen } from "react-icons/fa6";
 import { MdOutbox } from "react-icons/md";
 import { FaRegTrashCan } from "react-icons/fa6";
-export default function menu() {
+// import NewEmail from './categories/NewEmail';
+// import Inbox from './categories/Inbox';
+// import Outbox from './categories/outbox';
+// import AllMail from './categories/AllMail';
+// import Garbage from './categories/Garbage';
+import { Route, Routes } from "react-router-dom";
+export default function Menu() {
   return (
     <div className='flex flex-col m-10 w-1/5'>
+
+{/* <Routes>
+        <Route path="/" element={<NewEmail/>}/>
+        <Route path="/" element={<Inbox/>}/>
+        <Route path="/" element={<Outbox />}/>
+        <Route path="/" element={<AllMail/>}/>
+        <Route path="/" element={<Garbage/>}/>
+</Routes> */}
           <div className='flex items-center hover:bg-slate-400'><FaPen /><button className='m-2'>new email</button></div>
           <div className='flex items-center hover:bg-slate-400'><FaEnvelope /><button className='m-2'>Inbox </button></div>
           <div className='flex items-center hover:bg-slate-400'><MdOutbox /><button className='m-2'>outbox </button></div>
