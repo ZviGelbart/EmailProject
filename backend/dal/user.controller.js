@@ -5,12 +5,13 @@ DB.connect;
 async function create(data) {
   return userModel.create(data);
 }
-async function readOne(filter){
-  return userModel.findOne({...filter, isActive: true})
-}
 
 async function read(filter) {
-  return userModel.find({ ...filter, isActive: true });
+  return userModel.find({ ...filter});
+}
+
+async function readOne(filter){
+  return userModel.findOne({...filter})
 }
 
 async function update(filter, data) {

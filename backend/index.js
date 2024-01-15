@@ -9,8 +9,8 @@ app.use(express.json());
 
 const userRouter = require("./routs/user.router");
 const emailRouter=require("./routs/email.router")
-app.use("/emails", emailRouter);
 app.use("/users", userRouter);
+app.use("/emails", emailRouter);
 
 
 app.listen(8200, () => {

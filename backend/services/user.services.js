@@ -1,7 +1,10 @@
+const jsonwebtoken = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
 const controller = require("../dal/user.controller")
 
 async function getAllUser() {
     const user = await controller.read()
+    console.log(user);
     return user
 }
 
@@ -23,16 +26,37 @@ async function createUser(data) {
     if(errorList.length) throw errorList
 
     // map to model >> user (object)
+    const hashed = await bcrypt.hash(data.password, 10);
     let user = {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
-        password: data.password,
+        password: hashed,
         dateOfBirth: new Date()
     }
     let newUser = await controller.create(user)
     return newUser
 }
+
+
+
+// app.post("/users", async (req, res) => {
+//     //validation
+//     try {
+        
+//         users.push({
+//             username: req.body.username,
+//             password: hashed,
+//             age: req.body.age,
+//             id: usersId++,
+//         });
+//         res.status(201).send();
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send();
+//     }
+//   });
+
 
 async function validation(data) {
     let errors = []

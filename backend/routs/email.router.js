@@ -1,11 +1,13 @@
 const express = require("express");
 const emailRouter = express.Router();
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const emailServices = require("../services/email.services");
 
 
 // all inbox emails
 emailRouter.get("/inbox", async function(req,res){
-    const email = "dudi@gmail.com"
+    const email = "shlmi945679@gmail.com"
     let data= await emailServices.getAllEmails({destination: email})
     res.send(data)
 
@@ -30,3 +32,7 @@ emailRouter.post("/", async function(req, res){
 })
 
 module.exports=emailRouter;
+
+
+
+
