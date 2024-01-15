@@ -12,9 +12,9 @@ export default function body() {
        <Routes>
          <Route path="/newEmail" element={<NewEmail/>}/>
         <Route path="/inbox" element={<Inbox/>}/>
-        <Route path="/s" element={<Outbox/>}/>
-        <Route path="/s" element={<AllMail/>}/>
-        <Route path="/s" element={<Garbage/>}/>
+        <Route path="/Outbox" element={<Outbox/>}/>
+        <Route path="/AllMail" element={<AllMail/>}/>
+        <Route path="/Garbage" element={<Garbage/>}/>
         </Routes>
     </div>
   )

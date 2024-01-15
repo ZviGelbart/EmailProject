@@ -6,7 +6,8 @@ export default function Layout() {
   return (
     <div className='bg-slate-200 h-screen w-screen '>
       <Header/>
-      <div className='flex justify-between'>
+      {/* h-max */}
+      <div className='flex justify-between '> 
           <Menu/>
           <Body/>
       </div>

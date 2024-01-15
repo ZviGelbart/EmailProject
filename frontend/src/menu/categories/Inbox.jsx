@@ -1,11 +1,32 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+// import axios from "axios";
 export default function Inbox() {
+  const [mes, setMes] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:8200/emails/inbox").then((req) => {
-      console.log(req.data);
-    });
+    fetch("http://localhost:8200/emails/inbox")
+      .then((f) => f.json())
+      .then((data) => {
+        setMes(data);
+      });
   }, []);
 
-  return <div></div>;
+  const formatTime = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
+  return (
+    <div>
+      <div className=" flex justify-center text-2xl">inbox</div>
+      {mes.map((email) => (
+        <div key={email._id} className="flex justify-between border border-slate-950 p-2 h-10  overflow-hidden">
+          <button className="flex  justify-between w-full ">
+            <div className="">{email.sender}</div>
+            <div className="">{email.body}</div>
+            <div className="">{formatTime(email.date)}</div>
+          </button>
+        </div>
+      ))}
+    </div>
+  );
 }
