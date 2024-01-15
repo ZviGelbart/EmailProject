@@ -7,7 +7,7 @@ const emailServices = require("../services/email.services");
 
 // all inbox emails
 emailRouter.get("/inbox", async function(req,res){
-    const email = "shlmi945679@gmail.com"
+    const email = "shlomi945679@gmail.com"
     let data= await emailServices.getAllEmails({destination: email})
     res.send(data)
 
