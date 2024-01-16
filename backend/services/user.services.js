@@ -16,7 +16,9 @@ async function getUser(param){
     return user
 }
 
-async function ifUserExist() {
+async function ifUserExist(data) {
+    const userExist = await controller.readOne({email: data.sender})
+    return userExist
     
 }
 
@@ -74,5 +76,5 @@ async function validation(data) {
 module.exports = {
     getAllUser,
     createUser,
-
+    ifUserExist,
 }

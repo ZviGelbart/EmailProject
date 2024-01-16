@@ -1,5 +1,5 @@
 const controller = require("../dal/email.controller");
-
+const userExist = require('../services/user.services')
 
 async function getAllEmails(filter){
     const email = await controller.read(filter);
@@ -8,18 +8,25 @@ async function getAllEmails(filter){
 }
 
 async function sendEmail(data){
+  const senderExist = await userExist.ifUserExist(data.sender)
+  const destinationExist = await userExist.ifUserExist(data.destination)
+  if(senderExist & destinationExist){
     let errorList = await validation(data);
-  if (errorList.length) throw errorList;
-  let mesg = {
-        sender: data.sender,
-        destination: data.destination,
-        topic: data.topic,
-        body: data.body,
-        Date: new Date()
+    if (errorList.length) throw errorList;
+    let mesg = {
+          sender: data.sender,
+          destination: data.destination,
+          topic: data.topic,
+          body: data.body,
+          Date: new Date()
+    }
+      let newMes = await controller.create(mesg);
+      return newMes;
+  }else{
+    return "email is not exist"
   }
-    let newMes = await controller.create(mesg);
-    return newMes;
-}
+  }
+  
 
 async function validation(data) {
     let errors = [];
