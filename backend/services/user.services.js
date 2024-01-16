@@ -16,6 +16,10 @@ async function getUser(param){
     return user
 }
 
+async function ifUserExist() {
+    
+}
+
 async function createUser(data) {
     // exist by email
     const userExist = await controller.readOne({email: data.email});
