@@ -4,7 +4,7 @@ import Menu from './menu/menu'
 import Body from './body/Body'
 export default function Layout() {
   return (
-    <div className='bg-slate-200 h-screen w-screen '>
+    <div className='bg-slate-200 w-screen '>
       <Header/>
       {/* h-max */}
       <div className='flex justify-between '> 

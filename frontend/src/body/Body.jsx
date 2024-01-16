@@ -1,21 +1,56 @@
-import React from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
-import NewEmail from '../menu/categories/NewEmail'
-import Inbox from '../menu/categories/Inbox'
-import Outbox from '../menu/categories/outbox'
-import AllMail from '../menu/categories/AllMail'
-import Garbage from '../menu/categories/Garbage'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import NewEmail from '../menu/categories/NewEmail';
+import Inbox from '../menu/categories/Inbox';
+import Outbox from '../menu/categories/outbox';
+import AllMail from '../menu/categories/AllMail';
+import Garbage from '../menu/categories/Garbage';
 
-export default function body() {
+export default function Body() {
   return (
     <div className='w-4/5 m-10'>
-       <Routes>
-         <Route path="/newEmail" element={<NewEmail/>}/>
-        <Route path="/inbox" element={<Inbox/>}/>
-        <Route path="/Outbox" element={<Outbox/>}/>
-        <Route path="/AllMail" element={<AllMail/>}/>
-        <Route path="/Garbage" element={<Garbage/>}/>
-        </Routes>
+      <Routes>
+        <Route
+          path='/newEmail'
+          element={
+            <div className='h-screen overflow-y-auto'>
+              <NewEmail />
+            </div>
+          }
+        />
+        <Route
+          path='/inbox'
+          element={
+            <div className='h-screen overflow-y-auto'>
+              <Inbox />
+            </div>
+          }
+        />
+        <Route
+          path='/Outbox'
+          element={
+            <div className='h-screen overflow-y-auto'>
+              <Outbox />
+            </div>
+          }
+        />
+        <Route
+          path='/AllMail'
+          element={
+            <div className='h-screen overflow-y-auto'>
+              <AllMail />
+            </div>
+          }
+        />
+        <Route
+          path='/Garbage'
+          element={
+            <div className='h-screen overflow-y-auto'>
+              <Garbage />
+            </div>
+          }
+        />
+      </Routes>
     </div>
-  )
+  );
 }
