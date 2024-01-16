@@ -26,6 +26,18 @@ const userSchema = new mongoose.Schema({
     data: Buffer,
     type: String
   },
+  Messages: [
+    {
+      read:{
+        type: String,
+        required: true,
+      },
+      unread: {
+        type: String,
+        required: true,
+      }
+    }
+  ]
 });
 
 const userModel = mongoose.model("user", userSchema);
