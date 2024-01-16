@@ -35,7 +35,7 @@ export default function Body() {
           }
         />
         <Route
-          path='/AllMail'
+          path='/AllMail/:emailName'
           element={
             <div className='h-screen overflow-y-auto'>
               <AllMail />
@@ -43,7 +43,7 @@ export default function Body() {
           }
         />
         <Route
-          path='/Garbage'
+          path='/Garbage/:emailName'
           element={
             <div className='h-screen overflow-y-auto'>
               <Garbage />
