@@ -6,7 +6,7 @@ const emailServices = require("../services/email.services");
 
 
 // all inbox emails
-emailRouter.get("/inbox", async function(req,res){
+emailRouter.get("/inbox/", async function(req,res){
     const email = "shlomi945679@gmail.com"
     let data= await emailServices.getAllEmails({destination: email})
     res.send(data)
@@ -14,9 +14,9 @@ emailRouter.get("/inbox", async function(req,res){
 })
 
 emailRouter.get("/inbox/:email", async function(req,res){
-    const email = "tzvi@gmail.com"
-    const sender = "dudi@gmail.com"
-    let data= await emailServices.getAllEmails({sender : sender, destination: email});
+    const email = req.params.email
+    // const sender = req.sender
+    let data= await emailServices.getAllEmails({destination: email});
     res.send(data)
 })
 
