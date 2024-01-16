@@ -19,7 +19,7 @@ export default function Body() {
           }
         />
         <Route
-          path='/inbox'
+          path='/inbox/:emailName'
           element={
             <div className='h-screen overflow-y-auto'>
               <Inbox />
@@ -27,7 +27,7 @@ export default function Body() {
           }
         />
         <Route
-          path='/Outbox'
+          path='/Outbox/:emailName'
           element={
             <div className='h-screen overflow-y-auto'>
               <Outbox />

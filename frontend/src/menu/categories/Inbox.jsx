@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 // import axios from "axios";
 export default function Inbox() {
   const [mes, setMes] = useState([]);
+  const {emailName} = useParams()
+
   useEffect(() => {
-    fetch("http://localhost:8200/emails/inbox")
+    fetch("http://localhost:8200/emails/inbox/"+emailName)
       .then((f) => f.json())
       .then((data) => {
         setMes(data);

@@ -16,9 +16,19 @@ emailRouter.get("/inbox/", async function(req,res){
 emailRouter.get("/inbox/:email", async function(req,res){
     const email = req.params.email
     // const sender = req.sender
-    let data= await emailServices.getAllEmails({destination: email});
+    let data= await emailServices.getAllEmails({destination: email.trim()});
     res.send(data)
 })
+
+
+emailRouter.get("/outbox/:email", async function(req,res){
+    const email = req.params.email
+    // const sender = req.sender
+    let data= await emailServices.getAllEmails({sender: email.trim()});
+    res.send(data)
+})
+
+
 
 
 emailRouter.post("/", async function(req, res){
