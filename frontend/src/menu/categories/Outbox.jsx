@@ -22,7 +22,7 @@ export default function Inbox() {
 
   return (
     <div>
-      <div className=" flex justify-center text-2xl">inbox</div>
+      <div className=" flex justify-center text-2xl">outbox</div>
       {mes.map((email) => (
         <div key={email._id} className="flex justify-between border border-slate-950 p-2 h-10  overflow-hidden">
           <button className="flex  justify-between w-full ">
