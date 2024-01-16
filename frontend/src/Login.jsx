@@ -1,7 +1,68 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 export default function Login() {
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = emailRegex.test(userEmail);
+
+    if (isEmailValid && password) {
+      window.location.href = '/AllMail';
+    } else {
+      setEmailError('Invalid email format');
+      console.log('ERROR: Please fill in all fields correctly');
+    }
+  };
+
   return (
-    <div>Login</div>
-  )
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-white p-8 rounded shadow-md">
+        <h2 className="text-2xl font-semibold mb-4">Login to the System</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="userEmail">
+              Email Address
+            </label>
+            <input
+              className={`w-full p-2 border rounded-md ${emailError ? 'border-red-500' : ''}`}
+              type="text"
+              id="userEmail"
+              name="userEmail"
+              placeholder="Your email address"
+              value={userEmail}
+              onChange={(e) => {
+                setUserEmail(e.target.value);
+                setEmailError(''); 
+              }}
+              required
+            />
+            {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="w-full p-2 border rounded-md"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
