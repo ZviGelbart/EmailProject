@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import NewEmail from '../menu/categories/NewEmail';
+// import NewEmail from '../menu/categories/NewEmail';
 import Inbox from '../menu/categories/Inbox';
 import Outbox from '../menu/categories/outbox';
 import AllMail from '../menu/categories/AllMail';
@@ -10,14 +10,14 @@ export default function Body() {
   return (
     <div className='w-4/5 m-10'>
       <Routes>
-        <Route
+        {/* <Route
           path='/newEmail'
           element={
             <div className='h-screen overflow-y-auto'>
               <NewEmail />
             </div>
           }
-        />
+        /> */}
         <Route
           path='/inbox/:emailName'
           element={
