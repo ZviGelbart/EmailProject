@@ -17,7 +17,7 @@ async function getUser(param){
 }
 
 async function ifUserExist(data) {
-    const userExist = await controller.readOne({email: data.sender})
+    const userExist = await controller.readOne({email: data.email})
     return userExist
     
 }

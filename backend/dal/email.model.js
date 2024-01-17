@@ -1,21 +1,32 @@
 const mongoose = require("mongoose");
 
 const emailSchema = new mongoose.Schema({
-  sender: [{
-    email:{
-    type: String,
-    required: true,
+  sender: {
+    email: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: "outbox",
+      required: true,
+    },
   },
-  status:{
-    type: String,
-    default: "outbox",
-    required :true
-  },}
-],
-  destination: {
-    type: [String],
-    required: true,
-  },
+  destinations: [{
+    email: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: "inbox",
+      required: true,
+    },
+    read : {
+      type: Boolean,
+      default: false
+  }
+  }],
   topic: {
     type: String,
     required: true,
@@ -28,7 +39,6 @@ const emailSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  
 });
 
 const emailModel = mongoose.model("email", emailSchema);

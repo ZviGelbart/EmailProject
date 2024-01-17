@@ -10,7 +10,6 @@ const messageSchema = new mongoose.Schema ({
     status: {
         type : String,
         required: true,
-        default: "inbox"
     },
     emailId: {
         type : mongoose.SchemaTypes.ObjectId,
