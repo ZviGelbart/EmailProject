@@ -21,7 +21,7 @@ userRouter.get("/search/", async (req, res) => {
 
 userRouter.post("/", async (req, res) => {
     try {
-      const token = jwt.sign()
+      // const token = jwt.sign()
         const newUser = await userServices.createUser(req.body)
         res.send(newUser)
     }catch(err){

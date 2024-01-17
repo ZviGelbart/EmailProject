@@ -1,7 +1,7 @@
 const emailModel = require("./email.model");
 
 async function read(filter){
-    return emailModel.find({...filter})
+    return emailModel.find(filter)
 }
 
 async function create(data){
