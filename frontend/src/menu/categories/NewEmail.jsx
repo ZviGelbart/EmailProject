@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 export default function NewEmail({ closeNewEmail }) {
   const [userData, setUserData] = useState({
-    sender: '',
-    destination: '',
-    topic: '',
-    body: '',
+    // sender: '',
+    // destination: '',
+    // topic: '',
+    // body: '',
   });
 
   const handleChange = (e) => {
@@ -17,29 +17,27 @@ export default function NewEmail({ closeNewEmail }) {
   };
 
   const handleSubmit = (e) => {
-    // closeNewEmail()
     e.preventDefault();
     // לוגיקה נוספת לשליחת הנתונים לשרת או לעדכון המצב
     console.log('Email data submitted:', userData);
-
-    // בדיקה שכל השדות מולאו
+    
     if (userData.sender && userData.destination && userData.topic && userData.body) {
-      // לסגור את הקומפוננטה של NewEmail
-      closeNewEmail();
-    } else {
-      alert('Please fill in all required fields.');
+       closeNewEmail() ;
+    } 
+     else {
+         alert('Please fill in all required fields.');
     }
   };
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col' >
       <form>
         <button onClick={closeNewEmail}>✖️</button>
         <label htmlFor="from" className='block mb-2' >
         sender
           <input
             type="email"
-            name="from"
+            name="sender"
             className='m-2'
             onChange={handleChange}
             
@@ -50,7 +48,7 @@ export default function NewEmail({ closeNewEmail }) {
         destination
           <input
             type="email"
-            name="to"
+            name="destination"
             className='m-2'
             onChange={handleChange}
             
@@ -61,7 +59,7 @@ export default function NewEmail({ closeNewEmail }) {
         topic
           <input
             type="text"
-            name="subject"
+            name="topic"
             className='m-2'
             onChange={handleChange}
             
@@ -69,7 +67,7 @@ export default function NewEmail({ closeNewEmail }) {
         </label>
 
         <label htmlFor="body" className='block mb-2'>
-          body the email
+          body
           <input
             type="text"
             name="body"

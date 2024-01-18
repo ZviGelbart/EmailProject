@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const [userEmail, setUserEmail] = useState('');
@@ -33,7 +34,7 @@ export default function Login() {
               type="text"
               id="userEmail"
               name="userEmail"
-              placeholder="Your email address"
+              placeholder="Enter Your email address"
               value={userEmail}
               onChange={(e) => {
                 setUserEmail(e.target.value);
@@ -58,9 +59,12 @@ export default function Login() {
               required
             />
           </div>
+          <div className='flex justify-between'>
           <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">
             Login
           </button>
+         <div className='text-blue-600'><Link to="/SingIn">sing in</Link></div> 
+         </div>
         </form>
       </div>
     </div>
