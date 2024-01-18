@@ -8,30 +8,50 @@ async function getAllEmails(filter) {
 }
 
 async function sendEmail(data) {
-  const senderExist = await userExist.ifUserExist({email:data.sender});
-  for( let u of data.destinations){
-    let destinationExist = await userExist.ifUserExist({email: u})
-    console.log(destinationExist);
+  // const senderExist = await userExist.ifUserExist({email:data.sender});
+  let exist = [];
+  let notExist = [];
+  for (let u of data.destinations) {
+    let destinationExist = await userExist.ifUserExist({ email: u });
+    if (destinationExist && destinationExist.email) {
+      exist.push(destinationExist.email);
+    } else {
+      notExist.push(u);
+    }
   }
-  
-  if(senderExist) {
-    let errorList = await validation(data);
-    if (errorList.length) throw errorList;
-    let mesg = {
-      sender: { email: data.sender },
-      destinations: data.destinations.map(email => ({ email })),
-      topic: data.topic,
-      body: data.body,
-      Date: new Date(),
-    };
-    let newMes = await controller.create(mesg);
 
-  
+  let errorList = await
+  (data);
+  if (errorList.length) throw errorList;
+  let mesg = {
+    sender: { email: data.sender },
+    destinations: exist.map((email) => ({ email })),
+    topic: data.topic,
+    body: data.body,
+    Date: new Date(),
+  };
 
-    return newMes;
-  } else {
-    return "email is not exist";
+  console.log(exist);
+  console.log(notExist);
+
+  let newMes = await controller.create(mesg);
+  let result = []
+  for(let { email } of newMes.destinations) {
+    result.push({
+      email, status: "SUCCESS"
+    })
   }
+  for(let email of notExist) {
+    result.push({
+      email, status: "NOT_EXISEST"
+    })
+  }
+
+
+
+
+
+  return result;
 }
 
 async function validation(data) {

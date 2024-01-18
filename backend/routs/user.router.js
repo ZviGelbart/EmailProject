@@ -4,10 +4,19 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const userServices = require("../services/user.services");
 
+
+function createToken(req, res, next) {
+  const token = jwt.sign({ id: req.user.id }, process.env.TOKEN_SECRET);
+  res.setHeader('Authorization', `Bearer ${token}`);
+  next();
+}
+
 userRouter.get("/", async function (req, res) {
     let data = await userServices.getAllUser();
     res.send(data);
   });
+
+
 
 userRouter.get("/search/", async (req, res) => {
   try {
@@ -19,15 +28,33 @@ userRouter.get("/search/", async (req, res) => {
   }
 })
 
-userRouter.post("/", async (req, res) => {
+userRouter.post("/login", async (req, res) => {
     try {
-      // const token = jwt.sign()
+      const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
         const newUser = await userServices.createUser(req.body)
         res.send(newUser)
     }catch(err){
         res.status(400).send(err)
     }
 })
+function authentication(req, res, next) {
+  const authorization = req.headers.authorization;
+  if (!authorization) {
+      return res.status(401).send();
+  }
+  const token = authorization.split(" ")[1];
+  if (!token) {
+      return res.status(401).send();
+  }
+  try {
+      const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+
+      req.user = user;
+      next();
+  } catch (error) {
+      res.status(403).send();
+  }
+}
 
 
 

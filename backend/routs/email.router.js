@@ -27,6 +27,9 @@ emailRouter.get("/outbox/:email", async function(req,res){
     res.send(data)
 })
 
+emailRouter.put("/outbox/:email", async function(req, res){
+
+})
 
 
 

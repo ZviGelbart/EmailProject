@@ -21,6 +21,11 @@ async function ifUserExist(data) {
     return userExist
     
 }
+async function ifUserExist(data) {
+    const userExist = await controller.readOne({email: data.email})
+    return userExist
+    
+}
 
 async function createUser(data) {
     // exist by email
