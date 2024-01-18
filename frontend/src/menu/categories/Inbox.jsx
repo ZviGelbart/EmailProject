@@ -24,7 +24,7 @@ export default function Inbox() {
       {mes.map((email) => (
         <div key={email._id} className="flex justify-between border border-slate-950 p-2 h-10  overflow-hidden">
           <button className="flex  justify-between w-full ">
-            <div className="">{email.sender}</div>
+            <div className="">{email.sender.email}</div>
             <div className="">{email.body}</div>
             <div className="">{formatTime(email.date)}</div>
           </button>

@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import { Link} from 'react-router-dom';
 
-export default function Update({ handleCloseClick }) {
+export default function SingIn() {
   // הסטייט של המשתנים המוצגים בטופס
   const [formData, setFormData] = useState({
     //כאן אני צריך להכניס את היוזר שמגיע מהדאטה
-    // firstName: "John",
-    // lastName: "Doe",
-    // email: "john.doe@example.com",
-    // img: "11.jpeg",
-    // dateOfBirth: "1990-01-01",
-    // password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    img: "",
+    dateOfBirth: "",
+    password: "",
   });
 
   // פונקציה לעדכון הסטייט כאשר שדה בטופס משתנה
@@ -19,7 +20,6 @@ export default function Update({ handleCloseClick }) {
       ...formData,
       [name]: value,
     });
-    console.log(formData);
   };
 
   // פונקציה לשליחת הטופס
@@ -29,26 +29,22 @@ export default function Update({ handleCloseClick }) {
     console.log("Form submitted:", formData);
   };
 
-  const DeleteRows=()=>{
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      img: "",
-      dateOfBirth: "",
-      password: "",
-    });
-  };
+  const valideition=()=>{
+        // if(זה לאכפול במערכת וכל שאר הבדיקות שצריך אז זה יעבור לדף הראשי של המייל){
+
+        // }
+  }
+
   return (
-    <div className="">
-      <button onClick={handleCloseClick}>✖️</button>
-      <h2 className="text-2xl text-center">Edit Profile</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="min-h-screen flex items-center justify-center  border border-slate-950">
+       <form onSubmit={handleSubmit}>
+          <Link to="/login" className="flex ">✖️</Link>
+          <h2 className="text-center">create Profile</h2>
         <div className="p-2">
           <label className="m-4" htmlFor="firstName">
             First Name:
           </label>
-          <input
+          <input className="border border-slate-950"
             type="text"
             id="firstName"
             name="firstName"
@@ -60,7 +56,7 @@ export default function Update({ handleCloseClick }) {
           <label className="m-4" htmlFor="lastName">
             Last Name:
           </label>
-          <input
+          <input className="border border-slate-950"
             type="text"
             id="lastName"
             name="lastName"
@@ -73,7 +69,7 @@ export default function Update({ handleCloseClick }) {
           <label className="m-4" htmlFor="email">
             Email:
           </label>
-          <input
+          <input className="border border-slate-950"
             type="email"
             id="email"
             name="email"
@@ -86,7 +82,7 @@ export default function Update({ handleCloseClick }) {
           <label className="m-4" htmlFor="img">
             Image URL:
           </label>
-          <input
+          <input className="border border-slate-950"
             type="text"
             id="img"
             name="img"
@@ -99,7 +95,7 @@ export default function Update({ handleCloseClick }) {
           <label className="m-4" htmlFor="dateOfBirth">
             Date of Birth:
           </label>
-          <input
+          <input className="border border-slate-950"
             type="date"
             id="dateOfBirth"
             name="dateOfBirth"
@@ -112,7 +108,7 @@ export default function Update({ handleCloseClick }) {
           <label className="m-4" htmlFor="password">
             Password:
           </label>
-          <input
+          <input className="border border-slate-950"
             type="password"
             id="password"
             name="password"
@@ -120,22 +116,14 @@ export default function Update({ handleCloseClick }) {
             onChange={handleChange}
           />
         </div>
-    <div className="flex">
-        <button
-          onClick={handleCloseClick}
+
+        <Link to="/AllEmail"> <button
+          onClick={valideition}
           className="bg-blue-500 text-white p-2 m-9 rounded-md"
           type="submit"
         >
-          Update Profile
-        </button>
-        <button
-          onClick={DeleteRows}
-          className="bg-red-900 text-white p-2 m-9 rounded-md"
-          type="submit"
-        >
-          delete rows
-        </button>
-        </div>
+          create Profile
+        </button></Link>
       </form>
     </div>
   );
