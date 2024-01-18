@@ -5,11 +5,11 @@ const bcrypt = require('bcrypt')
 const userServices = require("../services/user.services");
 
 
-function createToken(req, res, next) {
-  const token = jwt.sign({ id: req.user.id }, process.env.TOKEN_SECRET);
-  res.setHeader('Authorization', `Bearer ${token}`);
-  next();
-}
+// function createToken(req, res, next) {
+//   const token = jwt.sign({ id: req.user.id }, process.env.TOKEN_SECRET);
+//   res.setHeader('Authorization', `Bearer ${token}`);
+//   next();
+// }
 
 userRouter.get("/", async function (req, res) {
     let data = await userServices.getAllUser();

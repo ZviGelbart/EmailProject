@@ -26,6 +26,9 @@ const userSchema = new mongoose.Schema({
     data: Buffer,
     type: String
   },
+  accessToken:{
+    type:String,
+  }
 });
 
 const userModel = mongoose.model("user", userSchema);
