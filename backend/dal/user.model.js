@@ -26,8 +26,8 @@ const userSchema = new mongoose.Schema({
     data: Buffer,
     type: String
   },
-  accessToken:{
-    type:String,
+  refreshToken:{
+    type:[String],
   }
 });
 

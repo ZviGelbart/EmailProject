@@ -30,9 +30,13 @@ userRouter.get("/search/", async (req, res) => {
 
 userRouter.post("/login", async (req, res) => {
     try {
-      const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
-        const newUser = await userServices.createUser(req.body)
-        res.send(newUser)
+      const user = await userServices.loginUser(req.body)
+      const accessToken = jwt.sign({email: req.email }, process.env.TOKEN_SECRET, {expiresIn: '15m'});
+      const refreshToken = jwt.sign({ email: req.email}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "30d"});
+      const updateToken = await userServices.updateToken(refreshToken, user.email)
+      console.log(updateToken);
+      // const newUser = await userServices.createUser(req.body)
+      res.send({user, accessToken, refreshToken})
     }catch(err){
         res.status(400).send(err)
     }
@@ -49,7 +53,7 @@ function authentication(req, res, next) {
   try {
       const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
 
-      req.user = user;
+      req.user = decoded;
       next();
   } catch (error) {
       res.status(403).send();

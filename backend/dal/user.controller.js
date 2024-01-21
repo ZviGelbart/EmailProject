@@ -14,8 +14,9 @@ async function readOne(filter){
   return userModel.findOne({...filter})
 }
 
-async function update(filter, data) {
-  return userModel.updateMany(filter, data);
+async function updateToken(filter, token) {
+  console.log(filter, token);
+  return userModel.updateOne({...filter}, {$push: {refreshToken: token}});
 }
 
 async function del(filter, data) {
@@ -23,4 +24,4 @@ async function del(filter, data) {
 }
 
 
-module.exports = {  create,read, update,del, readOne};
+module.exports = {  create,read, updateToken,del, readOne};
