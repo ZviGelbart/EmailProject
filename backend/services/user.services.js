@@ -21,10 +21,32 @@ async function ifUserExist(data) {
     return userExist
     
 }
-async function ifUserExist(data) {
-    const userExist = await controller.readOne({email: data.email})
-    return userExist
-    
+// async function ifUserExist(data) {
+//     const userExist = await controller.readOne({email: data.email})
+//     return userExist
+// }
+
+
+async function updateToken(token, email){
+    return controller.updateToken({email}, token)
+}
+
+
+async function loginUser(data){
+    const user =  await controller.readOne({email : data.email})
+    if(!user) throw "user is not exist"
+    let pass = await bcrypt.compare(data.password, user.password)
+    if(!pass) throw "password is not valid"
+    let userValid = {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        _id: user._id,
+        dateOfBirth: user.dateOfBirth,
+
+
+    }
+    return userValid
 }
 
 async function createUser(data) {
@@ -82,4 +104,6 @@ module.exports = {
     getAllUser,
     createUser,
     ifUserExist,
+    loginUser,
+    updateToken,
 }
