@@ -6,14 +6,33 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isEmailValid = emailRegex.test(userEmail);
 
     if (isEmailValid && password) {
+      try{
+        const response = await fetch('http://localhost:8200/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: userEmail, password }),
+        });
+         // טפל בתגובה מהשרת
+         if (response.ok) {
+          // הפנה ל-AllMail בעת הצלחה בהתחברות
       window.location.href = '/AllMail';
+      } else {
+        const errorData = await response.json();
+        console.log('שגיאה מהשרת:', errorData.message);
+      }
+    } catch (error) {
+      console.error('שגיאה בשליחת נתונים לשרת:', error);
+
+      }
     } else {
       setEmailError('Invalid email format');
       console.log('ERROR: Please fill in all fields correctly');

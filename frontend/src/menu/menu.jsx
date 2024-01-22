@@ -25,7 +25,7 @@ export default function Menu() {
       </div>
 
       {isNewEmailOpen && (
-        <div className='w-2/4 h-2/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-slate-600 bg-zinc-700'>
+        <div className='w-2/4 h-2/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-slate-600 bg-slate-300'>
           <NewEmail closeNewEmail={() => { setNewEmailOpen(false) }} />
         </div>
       )}

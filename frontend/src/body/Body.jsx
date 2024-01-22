@@ -10,14 +10,6 @@ export default function Body() {
   return (
     <div className='w-4/5 m-10'>
       <Routes>
-        {/* <Route
-          path='/newEmail'
-          element={
-            <div className='h-screen overflow-y-auto'>
-              <NewEmail />
-            </div>
-          }
-        /> */}
         <Route
           path='/inbox/:emailName'
           element={

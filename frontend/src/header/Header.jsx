@@ -38,7 +38,7 @@ export default function Header() {
 
       {/* הקומפוננטה Update תוצג או תסתר על פי ערך הסטייט isUpdateOpen */}
       {isUpdateOpen && (
-        <div className="w-2/4 h-2/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-slate-600 bg-zinc-700">
+        <div className="w-2/4 h-2/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-slate-600 bg-slate-400">
           <Update handleCloseClick={() => { setUpdateOpen(false) }} />
         </div>
       )}

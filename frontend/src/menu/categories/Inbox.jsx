@@ -13,6 +13,7 @@ export default function Inbox() {
       });
   }, []);
 
+  
   const formatTime = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -22,12 +23,15 @@ export default function Inbox() {
     <div>
       <div className=" flex justify-center text-2xl">inbox</div>
       {mes.map((email) => (
-        <div key={email._id} className="flex justify-between border border-slate-950 p-2 h-10  overflow-hidden">
+        <div key={email._id} className="flex justify-between border border-slate-950 p-2 h-10  overflow-hidden ">
           <button className="flex  justify-between w-full ">
             <div className="">{email.sender.email}</div>
             <div className="">{email.body}</div>
-            <div className="">{formatTime(email.date)}</div>
-          </button>
+            <div className="flex">
+             <div> {formatTime(email.date)}</div>
+             <button className="ml-7">🗑️</button>
+              </div>
+             </button>
         </div>
       ))}
     </div>
