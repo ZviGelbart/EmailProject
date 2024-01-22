@@ -43,7 +43,7 @@ userRouter.post("/login", async (req, res) => {
       console.log(updateToken);
       // const newUser = await userServices.createUser(req.body)
       res.send({user, accessToken, refreshToken})
-      console.log(user);
+      
     }catch(err){
         res.status(400).send(err)
     }
