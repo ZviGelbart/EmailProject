@@ -8,12 +8,12 @@ async function getAllUser() {
     return user
 }
 
-async function getUser(param){
-    let filter = {}
-    if(!filter) filter = param
-    let user = await controller.read(filter)
-    if(!user) throw "user is not exist"
+async function getUser(data){
+   const user = await controller.readOne({email:data})
+   console.log(user);
     return user
+    
+    
 }
 
 async function ifUserExist(data) {
@@ -106,4 +106,5 @@ module.exports = {
     ifUserExist,
     loginUser,
     updateToken,
+    getUser,
 }

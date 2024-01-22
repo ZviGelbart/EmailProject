@@ -11,11 +11,16 @@ const userServices = require("../services/user.services");
 //   next();
 // }
 
-userRouter.get("/", async function (req, res) {
+userRouter.get("/", async  (req, res)=> {
     let data = await userServices.getAllUser();
     res.send(data);
   });
 
+  userRouter.get('/:user',async (req , res) => {
+    let email  = req.params.email
+    let data = await userServices.getUser(email)
+    res.send(data)
+  } )
 
 
 userRouter.get("/search/", async (req, res) => {
