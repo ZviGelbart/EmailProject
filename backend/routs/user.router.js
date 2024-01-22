@@ -37,34 +37,21 @@ userRouter.post("/login", async (req, res) => {
   console.log(req.body);
     try {
       const user = await userServices.loginUser(req.body)
-      const accessToken = jwt.sign({email: req.email }, process.env.TOKEN_SECRET, {expiresIn: '15m'});
-      const refreshToken = jwt.sign({ email: req.email}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "30d"});
+      const accessToken = jwt.sign({email: user.email }, process.env.TOKEN_SECRET, {expiresIn: '15m'});
+      const refreshToken = jwt.sign({ email: user.email}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "30d"});
       const updateToken = await userServices.updateToken(refreshToken, user.email)
       console.log(updateToken);
       // const newUser = await userServices.createUser(req.body)
       res.send({user, accessToken, refreshToken})
+      console.log(user);
     }catch(err){
         res.status(400).send(err)
     }
 })
-function authentication(req, res, next) {
-  const authorization = req.headers.authorization;
-  if (!authorization) {
-      return res.status(401).send();
-  }
-  const token = authorization.split(" ")[1];
-  if (!token) {
-      return res.status(401).send();
-  }
-  try {
-      const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
 
-      req.user = decoded;
-      next();
-  } catch (error) {
-      res.status(403).send();
-  }
-}
+
+
+
 
 
 

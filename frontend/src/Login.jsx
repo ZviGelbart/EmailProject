@@ -30,6 +30,7 @@ export default function Login() {
         console.log('שגיאה מהשרת:', errorData.message);
       }
     } catch (error) {
+      setEmailError("שגיאת התחברות")
       console.error('שגיאה בשליחת נתונים לשרת:', error);
 
       }
@@ -68,7 +69,7 @@ export default function Login() {
               Password
             </label>
             <input
-              className="w-full p-2 border rounded-md"
+             className={`w-full p-2 border rounded-md ${emailError ? 'border-red-500' : ''}`}
               type="password"
               id="password"
               name="password"
@@ -77,6 +78,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
           </div>
           <div className='flex justify-between'>
           <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">
