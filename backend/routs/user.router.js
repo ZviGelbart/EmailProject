@@ -34,20 +34,18 @@ userRouter.get("/search/", async (req, res) => {
 })
 
 userRouter.post("/login", async (req, res) => {
-  console.log(req.body);
     try {
       const user = await userServices.loginUser(req.body)
       const accessToken = jwt.sign({email: user.email }, process.env.TOKEN_SECRET, {expiresIn: '15m'});
       const refreshToken = jwt.sign({ email: user.email}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "30d"});
       const updateToken = await userServices.updateToken(refreshToken, user.email)
-      console.log(updateToken);
+  
       // const newUser = await userServices.createUser(req.body)
       res.send({user, accessToken, refreshToken})
-      console.log(user);
     }catch(err){
         res.status(400).send(err)
     }
-})
+}) 
 
 
 
