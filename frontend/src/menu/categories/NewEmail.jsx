@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import UserContext from "../../UserContext";
 
 export default function NewEmail({ closeNewEmail }) {
   const [userData, setUserData] = useState({
-    // sender: '',
-    // destination: '',
-    // topic: '',
-    // body: '',
+    destinations: [],
+    topic: '',
+    body: '',
   });
 
   const handleChange = (e) => {
@@ -16,53 +16,65 @@ export default function NewEmail({ closeNewEmail }) {
     });
   };
 
+  const { user } = useContext(UserContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // לוגיקה נוספת לשליחת הנתונים לשרת או לעדכון המצב
-    console.log('Email data submitted:', userData);
     
-    if (userData.sender && userData.destination && userData.topic && userData.body) {
-       closeNewEmail() ;
-    } 
-     else {
-         alert('Please fill in all required fields.');
+    const emailData = {
+      destinations: userData.destinations.split(','), // פיצוץ המחרוזת למערך
+      topic: userData.topic,
+      body: userData.body,
+    };
+    
+    emailData.destinations.forEach(destination  => {
+      
+    fetch('http://localhost:8200/emails/', {
+      method: 'POST',
+      headers: { 
+        'Authorization': "Bearer " + user.accessToken,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        destinations: [destination.trim()],
+        topic: emailData.topic,
+        body: emailData.body,
+      }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Email data submitted:', data);
+      if (userData.destinations && userData.topic && userData.body) {
+        closeNewEmail();
+      } else {
+        alert('Please fill in all required fields.');
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  });
     }
-  };
-
   return (
     <div className='flex flex-col' >
       <form>
         <button onClick={closeNewEmail}>✖️</button>
-        <label htmlFor="from" className='block mb-2' >
-        sender
-          <input
-            type="email"
-            name="sender"
-            className='m-2'
-            onChange={handleChange}
-            
-          />
-        </label>
 
         <label htmlFor="to" className='block mb-2'>
-        destination
+          destination
           <input
             type="email"
-            name="destination"
+            name="destinations"
             className='m-2'
             onChange={handleChange}
-            
           />
         </label>
 
-        <label htmlFor="subject" className='block mb-2 '>
-        topic
+        <label htmlFor="subject" className='block mb-2'>
+          topic
           <input
             type="text"
             name="topic"
             className='m-2'
             onChange={handleChange}
-            
           />
         </label>
 
@@ -73,7 +85,6 @@ export default function NewEmail({ closeNewEmail }) {
             name="body"
             className='m-2'
             onChange={handleChange}
-            
           />
         </label>
 
@@ -88,6 +99,7 @@ export default function NewEmail({ closeNewEmail }) {
     </div>
   );
 }
+
 
 
 
