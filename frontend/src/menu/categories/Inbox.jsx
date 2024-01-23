@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import UserContext from "../../UserContext";
 
 export default function Inbox() {
   const [mes, setMes] = useState([]);
-  const { emailName } = useParams();
   // const {user} = UseContext(userContext)
   const { user } = useContext(UserContext);
-  console.log(user);
   useEffect(() => {
     fetch("http://localhost:8200/emails/inbox/", {
       headers: { Authorization: "Bearer " + user.accessToken },

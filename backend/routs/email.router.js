@@ -38,10 +38,8 @@ emailRouter.get("/inbox/", async function (req, res) {
   res.send(data);
 });
 
-emailRouter.get("/outbox/:email", async function (req, res) {
-  const email = req.params.email;
-  // const sender = req.sender
-  let data = await emailServices.getAllEmails({ "sender.email": email });
+emailRouter.get("/outbox/", async function (req, res) {
+  let data = await emailServices.getAllEmails({ "sender.email": req.email });
   res.send(data);
 });
 

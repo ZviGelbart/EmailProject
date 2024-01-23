@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import UserContext from "../../UserContext";
 
 
 export default function Outbox() {
   const [mes, setMes] = useState([]);
-  const {emailName} = useParams()
-
+  const { user } = useContext(UserContext)
   useEffect(() => {
-    fetch("http://localhost:8200/emails/outbox/"+emailName)
+    fetch("http://localhost:8200/emails/outbox/",{
+      headers:{Authorization: "Bearer " + user.accessToken }
+    })
       .then((f) => f.json())
       .then((data) => {
         setMes(data);
