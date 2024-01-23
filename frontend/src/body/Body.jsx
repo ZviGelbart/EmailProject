@@ -11,7 +11,7 @@ export default function Body() {
     <div className='w-4/5 m-10'>
       <Routes>
         <Route
-          path='/inbox/:emailName'
+          path='/inbox'
           element={
             <div className='h-screen overflow-y-auto'>
               <Inbox />

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "./UserContext";
 
 export default function Login() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+  const {user, setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,9 +23,11 @@ export default function Login() {
           },
           body: JSON.stringify({ email: userEmail, password }),
         });
-        console.log(response);
+        // console.log(response);
         const data = await response.json();
-        console.log(data);
+
+        setUser(data);
+        
         // טפל בתגובה מהשרת
         if (response.ok) {
           // הפנה ל-AllMail בעת הצלחה בהתחברות

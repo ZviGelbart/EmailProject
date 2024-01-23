@@ -33,10 +33,8 @@ function authentication(req, res, next) {
   }
 }
 
-emailRouter.get("/inbox/:email", async function (req, res) {
-  console.log(req.email);
-  const email = req.params.email;
-  let data = await emailServices.getAllEmails({ "destinations.email": email });
+emailRouter.get("/inbox/", async function (req, res) {
+  let data = await emailServices.getAllEmails({ "destinations.email": req.email });
   res.send(data);
 });
 
