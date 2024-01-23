@@ -7,7 +7,7 @@ export default function Inbox() {
   const { user } = useContext(UserContext);
 
   function handelGarbage(emailId){
-      fetch(`http://localhost:8200/emails/garbage/`,{
+      fetch(`http://localhost:8200/emails/garbage/${emailId}`,{
       method: "put",
       headers: {
         Authorization: "Bearer " + emailId.accessToken,
@@ -49,7 +49,7 @@ export default function Inbox() {
             <div className="">{email.body}</div>
             <div className="flex">
               <div> {formatTime(email.date)}</div>
-              <button onClick={()=>handelGarbage(email)} className="ml-7 hover:bg-gray-500">🗑️</button>
+              <button onClick={()=>handelGarbage(email._id)} className="ml-7 hover:bg-gray-500">🗑️</button>
             </div>
           </div>
         </div>

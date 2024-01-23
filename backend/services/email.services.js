@@ -10,9 +10,11 @@ async function getEmail(filter) {
   return email;
 }
 
-async function updateEmail(filter){
- const email = await controller.readOne(filter)
- return email
+async function updateEmail(email,status){
+ const email = await controller.readOne(email)
+ if(email){
+  let status = await controller.updateStatus(email, status)
+ }
 }
 async function sendEmail(data, senderEmail) {
   let exist = [];

@@ -3,6 +3,7 @@ const emailRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const emailServices = require("../services/email.services");
+const e = require("express");
 
 // all inbox emails
 // emailRouter.get("/inbox/", async function(req,res){
@@ -49,8 +50,11 @@ emailRouter.get("/outbox/", async function (req, res) {
   res.send(data);
 });
 
-emailRouter.put("/garbage", async function (req, res) {
-  let data = await emailServices.updateEmail({_id: req._id})
+emailRouter.put("/garbage/:emailId", async function (req, res) {
+  const email = req.params.emailId
+  const status = req.params.destinations.status
+  console.log(email);
+  let data = await emailServices.updateEmail(email ,status)
   res.send(data)
 });
 
