@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import  { useContext, useState } from 'react';
 import UserContext from "../../UserContext";
 
 export default function NewEmail({ closeNewEmail }) {
   const [userData, setUserData] = useState({
-    destinations: [],
+    destinations: '',
     topic: '',
     body: '',
   });
@@ -20,48 +20,42 @@ export default function NewEmail({ closeNewEmail }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const emailData = {
-      destinations: userData.destinations.split(','), // פיצוץ המחרוזת למערך
+      destinations: userData.destinations.split(',').map(destination => destination.trim()),
       topic: userData.topic,
       body: userData.body,
     };
-    
-    emailData.destinations.forEach(destination  => {
-      
-    fetch('http://localhost:8200/emails/', {
-      method: 'POST',
-      headers: { 
-        'Authorization': "Bearer " + user.accessToken,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        destinations: [destination.trim()],
-        topic: emailData.topic,
-        body: emailData.body,
-      }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Email data submitted:', data);
-      if (userData.destinations && userData.topic && userData.body) {
-        closeNewEmail();
-      } else {
-        alert('Please fill in all required fields.');
-      }
-    })
-    .catch(error => console.error('Error:', error));
-  });
+
+    if (emailData.destinations.length > 0 && emailData.topic && emailData.body) {
+      fetch('http://localhost:8200/emails/', {
+        method: 'POST',
+        headers: {
+          'Authorization': "Bearer " + user.accessToken,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Email data submitted:', data);
+          closeNewEmail();
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+      alert('Please fill in all required fields.');
     }
+  };
+
   return (
-    <div className='flex flex-col' >
+    <div className='flex flex-col'>
       <form>
         <button onClick={closeNewEmail}>✖️</button>
 
         <label htmlFor="to" className='block mb-2'>
           destination
           <input
-            type="email"
+            type="text"
             name="destinations"
             className='m-2'
             onChange={handleChange}
@@ -99,10 +93,6 @@ export default function NewEmail({ closeNewEmail }) {
     </div>
   );
 }
-
-
-
-
 
 
 // import React, { useState } from 'react'
