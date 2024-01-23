@@ -22,17 +22,24 @@ export default function Outbox() {
 
   return (
     <div>
-      <div className=" flex justify-center text-2xl">outbox</div>
-      {mes.map((email) => (
-        <div key={email._id} className="flex justify-between border border-slate-950 p-2 h-10 hover:bg-slate-400 overflow-hidden">
-          <button className="flex  justify-between w-full ">
-            <div className="">{email.sender.email}</div>
-            <div className="">{email.body}</div>
-            <div className="">{formatTime(email.date)}</div>
-            <button className="ml-7 hover:bg-gray-500  ">🗑️</button>
-          </button>
+    <div className=" flex justify-center text-2xl">inbox</div>
+    {mes.map((email) => (
+      <div
+        key={email._id}
+        className="flex justify-between border border-slate-950 p-2 h-10 hover:bg-slate-400  overflow-hidden "
+      >
+        {/* <div onClick={} className="flex  justify-between w-full "> */}
+
+        <div className="flex  justify-between w-full  ">
+          <div className="">{email.sender.email}</div>
+          <div className="">{email.body}</div>
+          <div className="flex">
+            <div> {formatTime(email.date)}</div>
+            <button className="ml-7 hover:bg-gray-500">🗑️</button>
+          </div>
         </div>
-      ))}
-    </div>
-  );
+      </div>
+    ))}
+  </div>
+);
 }
