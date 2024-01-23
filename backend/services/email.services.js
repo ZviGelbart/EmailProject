@@ -5,7 +5,15 @@ async function getAllEmails(filter) {
   const email = await controller.read(filter);
   return email;
 }
+async function getEmail(filter) {
+  const email = await controller.readOne(filter);
+  return email;
+}
 
+async function updateEmail(filter){
+ const email = await controller.readOne(filter)
+ return email
+}
 async function sendEmail(data, senderEmail) {
   let exist = [];
   let notExist = [];
@@ -83,4 +91,4 @@ async function validation(data, senderEmail) {
   return errors;
 }
 
-module.exports = { getAllEmails, sendEmail };
+module.exports = { getAllEmails, sendEmail, getEmail, updateEmail };

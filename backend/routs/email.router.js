@@ -38,12 +38,21 @@ emailRouter.get("/inbox/", async function (req, res) {
   res.send(data);
 });
 
+emailRouter.get("/allEmails/", async function (req, res) {
+  let data = await emailServices.getEmail({ _id: req._id });
+  console.log(data);
+  res.send(data);
+});
+
 emailRouter.get("/outbox/", async function (req, res) {
   let data = await emailServices.getAllEmails({ "sender.email": req.email });
   res.send(data);
 });
 
-emailRouter.put("/outbox/:email", async function (req, res) {});
+emailRouter.put("/garbage", async function (req, res) {
+  let data = await emailServices.updateEmail({_id: req._id})
+  res.send(data)
+});
 
 emailRouter.post("/", async function (req, res) {
   console.log(req.email);

@@ -35,7 +35,7 @@ export default function Body() {
           }
         />
         <Route
-          path='/Garbage/:emailName'
+          path='/garbage'
           element={
             <div className='h-screen overflow-y-auto'>
               <Garbage />

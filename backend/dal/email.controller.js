@@ -1,16 +1,15 @@
 const emailModel = require("./email.model");
 
-async function read(filter){
-    return emailModel.find(filter)
+async function read(filter) {
+  return emailModel.find(filter);
 }
-
-async function create(data){
-    console.log(data);
-    return emailModel.create(data)
+async function readOne(filter) {
+  return emailModel.findOne(filter);
 }
-
-
-
+async function create(data) {
+  console.log(data);
+  return emailModel.create(data);
+}
 
 // *****create*****
 // const go =async () => {
@@ -26,7 +25,4 @@ async function create(data){
 // }
 // go()
 
-
-
-
-module.exports = { read , create};
+module.exports = { read, create, readOne };
