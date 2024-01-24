@@ -1,8 +1,19 @@
 const emailModel = require("./email.model");
 
-async function read(filter) {
-  return emailModel.find({...filter,  "destinations.status" : "inbox"});
+async function read(filter, status) {
+  let condition = {}
+  if(status === 'outbox') {
+    condition = {...filter}
+    condition["sender.status"] = status;
+  }else if(status === 'inbox'){
+    condition["destinations"] = {$elemMatch: {email: filter["destinations.email"], status}};
+  }
+  return emailModel.find({ ...condition});
 }
+
+
+
+
 async function readOne(filter) {
   return emailModel.findOne(filter);
 }
