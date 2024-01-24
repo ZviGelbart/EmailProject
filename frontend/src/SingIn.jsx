@@ -36,6 +36,8 @@ export default function SingIn() {
       dateOfBirth: formData.dateOfBirth,
       password: formData.password,
     };
+    localStorage.setItem("userData", userData);
+
 if (firstName && lastName && email && password) {
   console.log("ffff");
   fetch('http://localhost:8200/users/', {

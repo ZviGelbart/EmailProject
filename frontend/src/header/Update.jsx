@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 export default function Update({ handleCloseClick }) {
   // הסטייט של המשתנים המוצגים בטופס
+  // const user = localStorage.getItem("userData")
   const [formData, setFormData] = useState({
     //כאן אני צריך להכניס את היוזר שמגיע מהדאטה
-    // firstName: "John",
-    // lastName: "Doe",
-    // email: "john.doe@example.com",
-    // img: "11.jpeg",
-    // dateOfBirth: "1990-01-01",
-    // password: "",
+    // firstName: user.firstName,
+    // lastName: user.lastName,
+    // email: user.email,
+    // dateOfBirth: user.dateOfBirth,
+    // password: user.password,
   });
 
   // פונקציה לעדכון הסטייט כאשר שדה בטופס משתנה
