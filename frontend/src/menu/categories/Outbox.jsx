@@ -5,6 +5,28 @@ import UserContext from "../../UserContext";
 export default function Outbox() {
   const [mes, setMes] = useState([]);
   const { user } = useContext(UserContext)
+
+  function handelGarbage(email) {
+    fetch(`http://localhost:8200/emails/garbage/`, {
+      method: "put",
+      headers: {
+        Authorization: "Bearer " + user.accessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+       
+        "_id":email._id,
+        "status": "garbage",
+      }),
+    })
+      .then((f) => f.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
   useEffect(() => {
     fetch("http://localhost:8200/emails/outbox/",{
       headers:{Authorization: "Bearer " + user.accessToken }
@@ -35,7 +57,7 @@ export default function Outbox() {
           <div className="">{email.body}</div>
           <div className="flex">
             <div> {formatTime(email.date)}</div>
-            <button className="ml-7 hover:bg-gray-500">🗑️</button>
+            <button onClick={() => { handelGarbage(email) }} className="ml-7 hover:bg-gray-500">🗑️</button>
           </div>
         </div>
       </div>
