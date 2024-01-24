@@ -6,12 +6,21 @@ export default function Inbox() {
   // const {user} = UseContext(userContext)
   const { user } = useContext(UserContext);
 
-  function handelGarbage(emailId){
-      fetch(`http://localhost:8200/emails/garbage/${emailId}`,{
+  function handelGarbage(email){
+      fetch(`http://localhost:8200/emails/garbage/${email._id}`,{
       method: "put",
       headers: {
-        Authorization: "Bearer " + emailId.accessToken,
+        Authorization: "Bearer " + email.accessToken,
         "Content-Type": "application/json",
+      },
+      body:{
+        _id:email._id,
+        "sender.email": email.sender.email,
+        "sender.status":email.status.email,
+        "destinations.email": email.destinations.email,
+        "destinations.status":"garbage",
+        topic:email.topic,
+        body:email.body
       }
     })
     .then((f) => f.json())
@@ -49,7 +58,7 @@ export default function Inbox() {
             <div className="">{email.body}</div>
             <div className="flex">
               <div> {formatTime(email.date)}</div>
-              <button onClick={()=>handelGarbage(email._id)} className="ml-7 hover:bg-gray-500">🗑️</button>
+              <button onClick={()=>{handelGarbage(email)}} className="ml-7 hover:bg-gray-500">🗑️</button>
             </div>
           </div>
         </div>
