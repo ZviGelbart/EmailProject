@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 export default function Update({ handleCloseClick }) {
   // הסטייט של המשתנים המוצגים בטופס
   const [formData, setFormData] = useState({
@@ -29,7 +29,7 @@ export default function Update({ handleCloseClick }) {
     console.log("Form submitted:", formData);
   };
 
-  const DeleteRows=()=>{
+  const DeleteRows = () => {
     setFormData({
       firstName: "",
       lastName: "",
@@ -38,6 +38,10 @@ export default function Update({ handleCloseClick }) {
       dateOfBirth: "",
       password: "",
     });
+  };
+  const logOut = () => {
+    localStorage.removeItem("accessToken");
+       localStorage.removeItem("refreshToken");
   };
   return (
     <div className="">
@@ -120,21 +124,28 @@ export default function Update({ handleCloseClick }) {
             onChange={handleChange}
           />
         </div>
-    <div className="flex">
-        <button
-          onClick={handleCloseClick}
-          className="bg-blue-500 text-white p-2 m-9 rounded-md"
-          type="submit"
-        >
-          Update Profile
-        </button>
-        <button
-          onClick={DeleteRows}
-          className="bg-red-900 text-white p-2 m-9 rounded-md"
-          type="submit"
-        >
-          delete rows
-        </button>
+        <div className="flex">
+          <button
+            onClick={handleCloseClick}
+            className="bg-blue-500 text-white p-2 m-9 rounded-md"
+            type="submit"
+          >
+            Update Profile
+          </button>
+          <button
+            onClick={DeleteRows}
+            className="bg-red-900 text-white p-2 m-9 rounded-md"
+            type="submit"
+          >
+            delete rows
+          </button>
+          <button
+            onClick={logOut}
+            className="bg-red-900 text-white p-2 m-9 rounded-md"
+            type="submit"
+          >
+              <Link to="/login"> log Out</Link>
+          </button>
         </div>
       </form>
     </div>

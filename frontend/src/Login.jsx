@@ -6,7 +6,8 @@ export default function Login() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
-  const {user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  // console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,9 +26,12 @@ export default function Login() {
         });
         // console.log(response);
         const data = await response.json();
-
-        setUser(data);
-        
+        const accessToken = data.accessToken;
+        const refreshToken = data.refreshToken;
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        setUser({ accessToken, refreshToken });
+        // setUser(refreshToken);
         // טפל בתגובה מהשרת
         if (response.ok) {
           // הפנה ל-AllMail בעת הצלחה בהתחברות
