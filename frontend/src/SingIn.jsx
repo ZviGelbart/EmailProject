@@ -26,15 +26,24 @@ export default function SingIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // ניתן להוסיף פה לוגיקה נוספת לעדכון המידע בשרת
-
-if (firstName && lastName && email && dateOfBirth && password) {
+    const userData = {
+      // destinations: userData.destinations.split(',').map(destination => destination.trim()),
+      // topic: userData.topic,
+      // body: userData.body,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      dateOfBirth: formData.dateOfBirth,
+      password: formData.password,
+    };
+if (firstName && lastName && email && password) {
+  console.log("ffff");
   fetch('http://localhost:8200/users/', {
     method: 'POST',
     headers: {
-      'Authorization': "Bearer " + user.accessToken,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(userData),
   })
     .then(response => response.json())
     .then(data => {
@@ -46,7 +55,7 @@ if (firstName && lastName && email && dateOfBirth && password) {
 }
 };
 
-    console.log("Form submitted:", formData);
+    // console.log("Form submitted:", formData);
 
   // const valideition=()=>{
   //       // if(זה לאכפול במערכת וכל שאר הבדיקות שצריך אז זה יעבור לדף הראשי של המייל){
@@ -97,7 +106,7 @@ if (firstName && lastName && email && dateOfBirth && password) {
           />
         </div>
 
-        <div className="p-2">
+        {/* <div className="p-2">
           <label className="m-4" htmlFor="img">
             Image URL:
           </label>
@@ -108,7 +117,7 @@ if (firstName && lastName && email && dateOfBirth && password) {
             value={formData.img}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
 
         <div className="p-2">
           <label className="m-4" htmlFor="dateOfBirth">
@@ -137,7 +146,7 @@ if (firstName && lastName && email && dateOfBirth && password) {
         </div>
 
         <Link to="/login"> <button
-          // onClick={valideition}
+          onClick={handleSubmit}
           className="bg-blue-500 text-white p-2 m-9 rounded-md"
           type="submit"
         >
