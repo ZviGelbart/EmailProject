@@ -10,9 +10,9 @@ async function create(data) {
   console.log(data);
   return emailModel.create(data);
 }
-async function updateStatus(email, status){
- return emailModel.updateOne({_id : email._id}, {"destinations.status": })
-}
+// async function updateStatus(email, status){
+//  return emailModel.updateOne({_id : email._id}, {"destinations.status": })
+// }
 // *****create*****
 // const go =async () => {
 //     let email = {
@@ -27,4 +27,4 @@ async function updateStatus(email, status){
 // }
 // go()
 
-module.exports = { read, create, readOne, updateStatus };
+module.exports = { read, create, readOne, };

@@ -5,17 +5,21 @@ async function getAllEmails(filter) {
   const email = await controller.read(filter);
   return email;
 }
-async function getEmail(filter) {
-  const email = await controller.readOne(filter);
-  return email;
-}
+// async function getEmail(filter) {
+//   const email = await controller.readOne(filter);
+//   return email;
+// }
 
-async function updateEmail(email,status){
- const email = await controller.readOne(email)
- if(email){
-  let status = await controller.updateStatus(email, status)
+async function updateEmail(emailId,status){
+ let mess = await controller.readOne({_id:emailId})
+ if(!mess) throw "email is not exist"
+ let meesToUpdate = {
+  
  }
-}
+  let updateStatus = await controller.updateStatus(mess._id, status)
+  return updateStatus
+ }
+
 async function sendEmail(data, senderEmail) {
   let exist = [];
   let notExist = [];
@@ -57,7 +61,7 @@ async function sendEmail(data, senderEmail) {
       result.push({
         email,
         status: "NOT_EXIST",
-      });
+        });
     }
 
     return result;
@@ -93,4 +97,4 @@ async function validation(data, senderEmail) {
   return errors;
 }
 
-module.exports = { getAllEmails, sendEmail, getEmail, updateEmail };
+module.exports = { getAllEmails, sendEmail, };

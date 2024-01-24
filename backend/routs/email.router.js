@@ -39,11 +39,11 @@ emailRouter.get("/inbox/", async function (req, res) {
   res.send(data);
 });
 
-emailRouter.get("/allEmails/", async function (req, res) {
-  let data = await emailServices.getEmail({ _id: req._id });
-  console.log(data);
-  res.send(data);
-});
+// emailRouter.get("/allEmails/", async function (req, res) {
+//   let data = await emailServices.getEmail({ _id: req._id });
+//   console.log(data);
+//   res.send(data);
+// });
 
 emailRouter.get("/outbox/", async function (req, res) {
   let data = await emailServices.getAllEmails({ "sender.email": req.email });
@@ -51,10 +51,9 @@ emailRouter.get("/outbox/", async function (req, res) {
 });
 
 emailRouter.put("/garbage/:emailId", async function (req, res) {
-  const email = req.params.emailId
-  const status = req.params.destinations.status
-  console.log(email);
-  let data = await emailServices.updateEmail(email ,status)
+  const emailId = req.params.emailId
+  const status = req.body
+  let data = await emailServices.updateEmail(emailId ,status)
   res.send(data)
 });
 
