@@ -27,7 +27,7 @@ export default function Body() {
           }
         />
         <Route
-          path='/AllMail/:emailName'
+          path='/AllMail/'
           element={
             <div className='h-screen overflow-y-auto'>
               <AllMail />
