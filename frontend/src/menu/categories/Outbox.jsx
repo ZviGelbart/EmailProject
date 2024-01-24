@@ -22,7 +22,7 @@ export default function Outbox() {
 
   return (
     <div>
-    <div className=" flex justify-center text-2xl">inbox</div>
+    <div className=" flex justify-center text-2xl">outbox</div>
     {mes.map((email) => (
       <div
         key={email._id}
