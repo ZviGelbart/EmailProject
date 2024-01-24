@@ -1,8 +1,8 @@
 const controller = require("../dal/email.controller");
 const userExist = require("../services/user.services");
 
-async function getAllEmails(filter) {
-  const email = await controller.read(filter);
+async function getAllEmails(filter, status) {
+  const email = await controller.read(filter, status);
   return email;
 }
 // async function getEmail(filter) {

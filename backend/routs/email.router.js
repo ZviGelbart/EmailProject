@@ -37,7 +37,7 @@ function authentication(req, res, next) {
 emailRouter.get("/inbox/", async function (req, res) {
   let data = await emailServices.getAllEmails({
     "destinations.email": req.email
-  });
+  }, "inbox");
   res.send(data);
 });
 
@@ -48,7 +48,7 @@ emailRouter.get("/inbox/", async function (req, res) {
 // });
 
 emailRouter.get("/outbox/", async function (req, res) {
-  let data = await emailServices.getAllEmails({ "sender.email": req.email });
+  let data = await emailServices.getAllEmails({ "sender.email": req.email }, "outbox");
   res.send(data);
 });
 
