@@ -35,7 +35,9 @@ function authentication(req, res, next) {
 }
 
 emailRouter.get("/inbox/", async function (req, res) {
-  let data = await emailServices.getAllEmails({ "destinations.email": req.email });
+  let data = await emailServices.getAllEmails({
+    "destinations.email": req.email,
+  });
   res.send(data);
 });
 
@@ -50,11 +52,30 @@ emailRouter.get("/outbox/", async function (req, res) {
   res.send(data);
 });
 
-emailRouter.put("/garbage/:emailId", async function (req, res) {
-  const emailId = req.params.emailId
-  const status = req.body
-  let data = await emailServices.updateEmail(emailId ,status)
-  res.send(data)
+// emailRouter.put("/garbage/:emailId", async function (req, res) {
+//   const emailId = req.params.emailId
+//   const status = req.body
+//   let data = await emailServices.updateEmail(emailId ,status)
+//   res.send(data)
+// });
+
+emailRouter.put("/garbage/", async function (req, res) {
+  try {
+    const userEmail = req.email;
+    const emailId = req.body._id;
+    const status = req.body.status; 
+    if (!status) {
+      throw new Error("Missing status in the request body");
+    }
+
+    0
+    let data = await emailServices.updateEmail(emailId, status, userEmail);
+
+    res.send(data);
+  } catch (error) {
+    console.error("Error updating email:", error.message);
+    res.status(400).send({ error: error.message });
+  }
 });
 
 emailRouter.post("/", async function (req, res) {

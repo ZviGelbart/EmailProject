@@ -10,16 +10,32 @@ async function getAllEmails(filter) {
 //   return email;
 // }
 
-async function updateEmail(emailId,status){
- let mess = await controller.readOne({_id:emailId})
- if(!mess) throw "email is not exist"
- let meesToUpdate = {
-  
- }
-  let updateStatus = await controller.updateStatus(mess._id, status)
-  return updateStatus
- }
+// async function updateEmail(emailId,status){
+//  let mess = await controller.readOne({_id:emailId})
+//  if(!mess) throw "email is not exist"
+//  let meesToUpdate = {
+//   "sender.email": status.sender.email,
+//   "sender.status":status.sender.status,
+//   "destinations.email": status.destinations.email,
+//   "destinations.status":"garbage",
+//   topic:status.topic,
+//   body:status.body
+//  }
+//   let updateStatus = await controller.update(mess._id, meesToUpdate)
+//   return updateStatus
+//  }
 
+async function updateEmail(emailId, status, userEmail) {
+
+  const mess = await controller.readOne({ _id: emailId  });
+  console.log(mess);
+//todo check user in des
+
+const userIndex = mess.destinations.findIndex(user => user.email === userEmail);
+mess.destinations[userIndex].status = status;
+
+return controller.update(mess);
+}
 async function sendEmail(data, senderEmail) {
   let exist = [];
   let notExist = [];
@@ -46,10 +62,10 @@ async function sendEmail(data, senderEmail) {
       Date: new Date(),
     };
 
-    // שליחת המייל לנמענים הקיימים
+    
     let newMes = await controller.create(mesg);
 
-    // יצירת תוצאות לפי נמענים שנמצאו
+    
     let result = [];
     for (let { email } of newMes.destinations) {
       result.push({
@@ -66,7 +82,6 @@ async function sendEmail(data, senderEmail) {
 
     return result;
   } else {
-    // אם לא קיימים נמענים, לא לשלוח מייל ולהחזיר רק תוצאות לפי הנמענים שנבדקו
     return notExist.map((email) => ({
       email,
       status: "NOT_EXIST",
@@ -77,7 +92,6 @@ async function sendEmail(data, senderEmail) {
 async function validation(data, senderEmail) {
   let errors = [];
 
-  // בדיקה שהשולח קיים
   let senderExist = await userExist.ifUserExist({ email: senderEmail });
   if (!senderExist || !senderExist.email) {
     errors.push("Sender does not exist");
@@ -97,4 +111,4 @@ async function validation(data, senderEmail) {
   return errors;
 }
 
-module.exports = { getAllEmails, sendEmail, };
+module.exports = { getAllEmails, sendEmail, updateEmail};
