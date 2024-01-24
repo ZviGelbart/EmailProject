@@ -19,7 +19,7 @@ export default function Body() {
           }
         />
         <Route
-          path='/Outbox/'
+          path='/Outbox'
           element={
             <div className='h-screen overflow-y-auto'>
               <Outbox />
